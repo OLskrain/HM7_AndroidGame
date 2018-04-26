@@ -63,17 +63,19 @@ public class GameScreen implements Screen {//чтобы класс был экр
     public void createGUI() {
         stage = new Stage(ScreenManager.getInstance().getViewport(), batch);
 
-        InputProcessor myProc = new InputAdapter() {
+        InputProcessor myProc = new InputAdapter() {//создаем свой процессор событий
             @Override
-            public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+            public boolean touchDown(int screenX, int screenY, int pointer, int button) {//если кликнули. считаем какая клетка
                 selectedCellX = (int) (mousePosition.x / 80);
                 selectedCellY = (int) (mousePosition.y / 80);
-                return true;
+                return true;//говорит что событие обработано.ни кто не может его обрабатывать больше
             }
         };
-
+//у нас есть процессор для stage  и наш. но одновременно их использовать нельзя и мы их объединяем в мультиплекс.
+        //мы ему говорим, что когда событие приходит. сначала отдаем в stage. если stage его обрабатывает то все ок, иначе отдаем
+        //событие в наш процессор myProc
         InputMultiplexer im = new InputMultiplexer(stage, myProc);
-        Gdx.input.setInputProcessor(im);
+        Gdx.input.setInputProcessor(im);//в качестве процессора мультиплексор
 
         skin = new Skin();
         skin.addRegions(Assets.getInstance().getAtlas());
