@@ -90,12 +90,15 @@ public class GameScreen implements Screen {//чтобы класс был экр
         Button btnSetTurret = new TextButton("Set", skin, "simpleSkin");
         Button btnUpgradeTurret = new TextButton("Upg", skin, "simpleSkin");
         Button btnDestroyTurret = new TextButton("Dst", skin, "simpleSkin");
+        Button btnToMenu = new TextButton("Menu", skin, "simpleSkin");
         btnSetTurret.setPosition(10, 10);
         btnUpgradeTurret.setPosition(110, 10);
         btnDestroyTurret.setPosition(210, 10);
+        btnToMenu.setPosition(1110,10);
         groupTurretAction.addActor(btnSetTurret);
         groupTurretAction.addActor(btnUpgradeTurret);
         groupTurretAction.addActor(btnDestroyTurret);
+        groupTurretAction.addActor(btnToMenu);
 
         stage.addActor(groupTurretAction);
 
@@ -103,6 +106,18 @@ public class GameScreen implements Screen {//чтобы класс был экр
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 turretEmitter.setTurret(selectedCellX, selectedCellY);
+            }
+        });
+        btnDestroyTurret.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+           turretEmitter.destroyTurret(selectedCellX,selectedCellY);
+            }
+        });
+        btnToMenu.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+           ScreenManager.getInstance().changeScreen(ScreenManager.ScreenType.MENU);
             }
         });
     }

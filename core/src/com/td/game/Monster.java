@@ -81,16 +81,16 @@ public class Monster {
         this.speed = MathUtils.random(80.0f, 120.0f);
     }
 
-    public void render(SpriteBatch batch) {
+    public void render(SpriteBatch batch) {//отрисовка монстра
         batch.draw(texture, position.x - texture.getRegionWidth() / 2, position.y - texture.getRegionHeight() / 2, 40, 40,80,80,0.8f,0.8f,0);
     }
 
-    public void renderHUD(SpriteBatch batch, BitmapFont font) {
-        batch.draw(textureBackHp, position.x - 30, position.y + 40, 60, 16);
-        batch.draw(textureHp, position.x - 30, position.y + 40, ((float)hp / hpMax) * 60, 16);
-        sbHUD.setLength(0);
-        sbHUD.append(hp);
-        font.draw(batch, sbHUD, position.x - 30, position.y + 58, 60, 1, false);
+    public void renderHUD(SpriteBatch batch, BitmapFont font) {//метод для отрисовки информации о монстре
+        batch.draw(textureBackHp, position.x - 30, position.y + 40, 60, 16);//фон
+        batch.draw(textureHp, position.x - 30, position.y + 40, ((float)hp / hpMax) * 60, 16);//отрисовка в цвете
+        sbHUD.setLength(0);//сначало сброс
+        sbHUD.append(hp);//потом отрисовка
+        font.draw(batch, sbHUD, position.x - 30, position.y + 58, 60, 1, false);//отрисовка хп в цифре
     }
 
     public void update(float dt) {
